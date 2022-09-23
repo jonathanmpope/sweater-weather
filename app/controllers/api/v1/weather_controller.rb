@@ -1,7 +1,7 @@
 class Api::V1::WeatherController < ApplicationController
 
     def show 
-        if params[:location] != ""
+        if params[:location] != nil && params[:location] != ""
             coordinates = MapquestFacade.get_coordinates(params[:location])
             weather = OpenweatherFacade.get_weather(coordinates)
 

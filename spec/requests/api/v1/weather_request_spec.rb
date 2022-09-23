@@ -56,5 +56,15 @@ describe 'Weather API', :vcr do
         expect(weather[:attributes][:hourly_weather].first[:temperature]).to be_a Float
         expect(weather[:attributes][:hourly_weather].first[:conditions]).to be_a String
         expect(weather[:attributes][:hourly_weather].first[:icon]).to be_a String
+    end
+    
+    it 'can returns an error if no location is provided' do
+        get "/api/v1/forecast?location"
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq 404
+
+        data = JSON.parse(response.body, symbolize_names: true)
+        expect(data[:error]).to eq "location required"
     end 
 end
