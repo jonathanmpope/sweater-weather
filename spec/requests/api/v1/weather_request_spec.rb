@@ -28,7 +28,7 @@ describe 'Weather API', :vcr do
         expect(weather[:attributes][:hourly_weather].count).to eq(8)
 
         expect(weather[:attributes][:current_weather]).to contain_exactly(:datetime, :sunrise, :sunset, :temperature, :feels_like, 
-                                                                            :humidiy, :uvi, :visibility, :conditions, :icon)
+                                                                            :humidity, :uvi, :visibility, :conditions, :icon)
 
         expect(weather[:attributes][:current_weather][:datetime]).to be_a String
         expect(weather[:attributes][:current_weather][:sunrise]).to be_a String

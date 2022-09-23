@@ -4,7 +4,7 @@ class Currentweather
                 :sunset, 
                 :temperature, 
                 :feels_like, 
-                :humidiy, 
+                :humidity, 
                 :uvi, 
                 :visibility, 
                 :conditions, 
