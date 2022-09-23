@@ -67,4 +67,16 @@ describe 'Weather API', :vcr do
         data = JSON.parse(response.body, symbolize_names: true)
         expect(data[:error]).to eq "location required"
     end 
+
+    it 'can says what is not in the ' do
+        get "/api/v1/forecast?location=denver,co"
+
+        weather = JSON.parse(response.body, symbolize_names: true)[:data]
+
+        expect(weather[:attributes][:current_weather].keys).to_not contain_exactly(:pressure, :dew_point, :clouds, :wind_speed, :wind_deg)
+        
+        expect(weather[:attributes][:daily_weather].first.keys).to_not contain_exactly(:moonrise, :moonset, :moon_phase, :day, :night, :eve, :morn, :pressure, :humidity, :dew_point, :wind_speed, :wind_deg, :wind_gust)
+        
+        expect(weather[:attributes][:hourly_weather].first.keys).to_not contain_exactly(:pressure, :feels_like, :humidity, :dew_point, :uvi, :clouds, :visibility, :wind_deg, :wind_speed, :wind_gust)
+    end 
 end
