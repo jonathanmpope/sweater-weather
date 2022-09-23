@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Weather API' do
+describe 'Weather API', :vcr do
     it 'can return the weather for a city' do
         get "/api/v1/forecast?location=denver,co"
 
