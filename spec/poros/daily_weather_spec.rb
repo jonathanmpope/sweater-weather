@@ -52,6 +52,5 @@ RSpec.describe Dailyweather do
         expect(daily.min_temp).to eq(58.73)
         expect(daily.conditions).to eq("clear sky")
         expect(daily.icon).to eq("01d")
-
     end 
 end 
