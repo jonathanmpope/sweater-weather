@@ -1,32 +1,32 @@
 require 'rails_helper'
 
-describe 'User API', :vcr do
+describe 'User API' do
     it 'allows the FE to create users and return an API key' do
         body = {
-                "email": "whatever@example.com",
-                 "password": "password",
-                "password_confirmation": "password"
+                "email": "whatever12@example.com",
+                 "password": "password1",
+                "password_confirmation": "password1"
                 }
 
-        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/users", params: body 
 
-        post "/api/v1/users", headers: headers, params: JSON.generate(message: message_params)
+        # post "/api/v1/users?email=test@test.com"
 
-        expect(reponse).to be_successful
+        expect(response).to be_successful
 
         expect(response.status).to eq(201)
-
-        response = JSON.parse(response.body, symbolize_names: true)[:data]
+    
+        info = JSON.parse(response.body, symbolize_names: true)[:data]
         
-        expect(response).to have_key(:type)
-        expect(response[:type]).to eq("users")
+        expect(info).to have_key(:type)
+        expect(info[:type]).to eq("user")
 
-        expect(response).to have_key(:attributes)
+        expect(info).to have_key(:attributes)
 
-        expect(response[:attributes]).to have_key(:email)
-        expect(weather[:attributes][:email]).to be_a string 
+        expect(info[:attributes]).to have_key(:email)
+        expect(info[:attributes][:email]).to be_a String 
 
-        expect(response[:attributes]).to have_key(:api_key)
-        expect(weather[:attributes][:api_key]).to be_a string 
+        expect(info[:attributes]).to have_key(:api_key)
+        expect(info[:attributes][:api_key]).to be_a String 
     end 
 end 
