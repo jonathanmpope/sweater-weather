@@ -51,4 +51,25 @@ describe 'User API' do
         expect(info[:error]).to have_key(:password_confirmation)
         expect(info[:error][:password_confirmation]).to eq(["doesn't match Password"])
     end 
+
+    it 'returns an error if data is missing' do
+        body = {
+                "email": "whatever123456@example.com",
+                "password": "password",
+                }
+
+        post "/api/v1/users", params: body 
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq(422)
+    
+        info = JSON.parse(response.body, symbolize_names: true)
+       
+        expect(info).to have_key(:error)
+        expect(info[:error]).to be_a Hash 
+           
+        expect(info[:error]).to have_key(:password_confirmation)
+        expect(info[:error][:password_confirmation]).to eq(["can't be blank"])
+    end 
 end 
