@@ -1,3 +1,4 @@
+# :nocov:
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -70,3 +71,11 @@ VCR.configure do |config|
   config.filter_sensitive_data('<map_key>') { ENV['map_key'] }
   config.configure_rspec_metadata!
 end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+# :nocov:
