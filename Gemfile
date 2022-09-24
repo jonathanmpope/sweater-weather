@@ -38,8 +38,8 @@ group :development, :test do
   gem 'vcr'
   gem 'simplecov'
   gem 'rspec-rails' 
-  gem 'shoulda-matchers'
-
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'capybara'
 end
 
 group :development do
