@@ -43,7 +43,26 @@ describe 'Sessions API' do
 
         expect(response).to_not be_successful
 
-        expect(response.status).to eq(422)
+        expect(response.status).to eq(401)
+    
+        info = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(info).to have_key(:error)
+        expect(info[:error]).to be_a String
+        expect(info[:error]).to eq("bad request")
+    end 
+
+    it 'returns an error if user does not exist' do
+        body = {
+                "email": "whatever1244@example.com",
+                "password": "password1111",
+                }
+
+        post "/api/v1/sessions", params: body 
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq(401)
     
         info = JSON.parse(response.body, symbolize_names: true)
         
