@@ -34,9 +34,9 @@ describe 'Weather API', :vcr do
         expect(weather[:attributes][:current_weather][:sunset]).to be_a String
         expect(weather[:attributes][:current_weather][:temperature]).to be_a Float
         expect(weather[:attributes][:current_weather][:feels_like]).to be_a Float
-        expect(weather[:attributes][:current_weather][:humidity]).to be_a Integer or be_a Float
-        expect(weather[:attributes][:current_weather][:uvi]).to be_a Float or be_a Integer
-        expect(weather[:attributes][:current_weather][:visibility]).to be_a Integer or be_a Float
+        expect(weather[:attributes][:current_weather][:humidity]).to be_a(Float).or be_a(Integer)
+        expect(weather[:attributes][:current_weather][:uvi]).to be_a(Float).or be_a(Integer)
+        expect(weather[:attributes][:current_weather][:visibility]).to be_a(Float).or be_a(Integer)
         expect(weather[:attributes][:current_weather][:conditions]).to be_a String
         expect(weather[:attributes][:current_weather][:icon]).to be_a String
 
