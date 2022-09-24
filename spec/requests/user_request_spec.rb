@@ -72,4 +72,34 @@ describe 'User API' do
         expect(info[:error]).to have_key(:password_confirmation)
         expect(info[:error][:password_confirmation]).to eq(["can't be blank"])
     end 
+
+    it 'will not create a user if email is already taken' do
+        body = {
+                "email": "whatever12@example.com",
+                 "password": "password1",
+                "password_confirmation": "password1"
+                }
+
+        post "/api/v1/users", params: body 
+
+        body = {
+                "email": "whatever12@example.com",
+                 "password": "password1",
+                "password_confirmation": "password1"
+                }
+
+        post "/api/v1/users", params: body 
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq(422)
+    
+        info = JSON.parse(response.body, symbolize_names: true)
+       
+        expect(info).to have_key(:error)
+        expect(info[:error]).to be_a Hash 
+           
+        expect(info[:error]).to have_key(:email)
+        expect(info[:error][:email]).to eq(["has already been taken"])
+    end 
 end 
