@@ -10,8 +10,6 @@ describe 'User API' do
 
         post "/api/v1/users", params: body 
 
-        # post "/api/v1/users?email=test@test.com"
-
         expect(response).to be_successful
 
         expect(response.status).to eq(201)
