@@ -30,4 +30,25 @@ describe 'Sessions API' do
         expect(info[:attributes][:api_key]).to be_a String 
         expect(info[:attributes][:api_key]).to eq user.api_key 
     end 
+
+    it 'returns an error if passwords do not match' do
+        user = User.create!(email: "whatever12@example.com", password: "password1", password_confirmation: "password1")
+
+        body = {
+                "email": "whatever12@example.com",
+                "password": "password1111",
+                }
+
+        post "/api/v1/sessions", params: body 
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq(422)
+    
+        info = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(info).to have_key(:error)
+        expect(info[:error]).to be_a String
+        expect(info[:error]).to eq("bad request")
+    end 
 end 
