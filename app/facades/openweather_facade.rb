@@ -10,7 +10,6 @@ class OpenweatherFacade
 
     def self.get_road_trip_weather(coordinates, directions)
         json = OpenweatherService.get_weather(coordinates)
-        binding.pry 
         weather = Weather_at_eta.new(json, directions)
         Roadtrip.new(directions, weather)
     end 

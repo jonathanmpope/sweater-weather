@@ -16,35 +16,35 @@ describe 'Roadtrip API', :vcr do
         expect(response).to be_successful
 
         roadtrip = JSON.parse(response.body, symbolize_names: true)[:data]
-
+        
         expect(roadtrip).to have_key(:id)
-        expect(weather[:id]).to eq(nil)
+        expect(roadtrip[:id]).to eq(nil)
 
         expect(roadtrip).to have_key(:type)
-        expect(weather[:type]).to eq("roadtrip")
+        expect(roadtrip[:type]).to eq("roadtrip")
 
         expect(roadtrip).to have_key(:attributes)
-        expect(weather[:attributes]).to be_a Hash 
+        expect(roadtrip[:attributes]).to be_a Hash 
 
-        expect(info[:attributes]).to have_key(:start_city)
-        expect(info[:attributes][:start_city]).to be_a String 
-        expect(info[:attributes][:start_city]).to eq "Denver, CO"
+        expect(roadtrip[:attributes]).to have_key(:start_city)
+        expect(roadtrip[:attributes][:start_city]).to be_a String 
+        expect(roadtrip[:attributes][:start_city]).to eq "Denver,CO"
 
-        expect(info[:attributes]).to have_key(:end_city)
-        expect(info[:attributes][:end_city]).to be_a String 
-        expect(info[:attributes][:end_city]).to eq "Pueblo, CO"
+        expect(roadtrip[:attributes]).to have_key(:end_city)
+        expect(roadtrip[:attributes][:end_city]).to be_a String 
+        expect(roadtrip[:attributes][:end_city]).to eq "Pueblo,CO"
 
-        expect(info[:attributes]).to have_key(:travel_time)
-        expect(info[:attributes][:travel_time]).to be_a String 
+        expect(roadtrip[:attributes]).to have_key(:travel_time)
+        expect(roadtrip[:attributes][:travel_time]).to be_a String 
 
-        expect(info[:attributes]).to have_key(:weather_at_eta)
-        expect(info[:attributes][:weather_at_eta]).to be_a Hash  
+        expect(roadtrip[:attributes]).to have_key(:weather_at_eta)
+        expect(roadtrip[:attributes][:weather_at_eta]).to be_a Hash  
 
-        expect(info[:attributes][:weather_at_eta]).to have_key(:temperature)
-        expect(info[:attributes][:weather_at_eta][:temperature]).to be_a(Float).or be_a(Integer)
+        expect(roadtrip[:attributes][:weather_at_eta]).to have_key(:temperature)
+        expect(roadtrip[:attributes][:weather_at_eta][:temperature]).to be_a(Float).or be_a(Integer)
 
-        expect(info[:attributes][:weather_at_eta]).to have_key(:conditions)
-        expect(info[:attributes][:weather_at_eta][:conditions]).to be_a(String)
+        expect(roadtrip[:attributes][:weather_at_eta]).to have_key(:conditions)
+        expect(roadtrip[:attributes][:weather_at_eta][:conditions]).to be_a(String)
     end 
 
 end 
