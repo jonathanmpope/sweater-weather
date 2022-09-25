@@ -10,8 +10,7 @@ class Weather_at_eta
             @temperature = data[:hourly][directions.travel_time[:hours]][:temp]
             @conditions = data[:hourly][directions.travel_time[:hours]][:weather].first[:description]
         else 
-            binding.pry 
-            @temperature = data[:daily][directions.travel_time[:days]][:temp]
+            @temperature = data[:daily][directions.travel_time[:days]][:temp][:day]
             @conditions = data[:daily][directions.travel_time[:days]][:weather].first[:description]
         end 
     end

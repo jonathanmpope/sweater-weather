@@ -7,7 +7,7 @@ class MapquestFacade
 
     def self.get_directions(start, stop)
         json = MapquestService.get_directions(start, stop)[:route]
-        if json[:realTime] != -1 
+        if json[:routeError][:errorCode] != 2 
             Directions.new(start, stop, json)
         else  
             "Impossible"

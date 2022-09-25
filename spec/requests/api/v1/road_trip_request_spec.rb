@@ -52,8 +52,8 @@ describe 'Roadtrip API', :vcr do
 
         body = 
             {
-            "origin": "New York, NY",
-            "destination": "Los Angeles, CA",
+            "origin": "New York,NY",
+            "destination": "Los Angeles,CA",
             "api_key": "#{user.api_key}"
             }
             
@@ -62,7 +62,7 @@ describe 'Roadtrip API', :vcr do
         expect(response).to be_successful
 
         roadtrip = JSON.parse(response.body, symbolize_names: true)[:data]
-        binding.pry 
+        
         expect(roadtrip).to have_key(:id)
         expect(roadtrip[:id]).to eq(nil)
 
@@ -74,11 +74,11 @@ describe 'Roadtrip API', :vcr do
 
         expect(roadtrip[:attributes]).to have_key(:start_city)
         expect(roadtrip[:attributes][:start_city]).to be_a String 
-        expect(roadtrip[:attributes][:start_city]).to eq "Denver,CO"
+        expect(roadtrip[:attributes][:start_city]).to eq "New York,NY"
 
         expect(roadtrip[:attributes]).to have_key(:end_city)
         expect(roadtrip[:attributes][:end_city]).to be_a String 
-        expect(roadtrip[:attributes][:end_city]).to eq "Pueblo,CO"
+        expect(roadtrip[:attributes][:end_city]).to eq "Los Angeles,CA"
 
         expect(roadtrip[:attributes]).to have_key(:travel_time)
         expect(roadtrip[:attributes][:travel_time]).to be_a String 
@@ -99,7 +99,7 @@ describe 'Roadtrip API', :vcr do
         body = 
             {
             "origin": "New York, NY",
-            "destination": "Panama City, Panama",
+            "destination": "London, England",
             "api_key": "#{user.api_key}"
             }
             

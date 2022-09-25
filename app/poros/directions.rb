@@ -6,14 +6,14 @@ class Directions
     def initialize(start, stop, data)
         @start_city = start
         @end_city = stop 
-        @travel_time = days_hours_minutes(data[:realTime])
+        @travel_time = days_hours_minutes(data[:formattedTime])
     end
 
-    def days_hours_minutes(seconds)
+    def days_hours_minutes(time)
         time_hash = {}
-        time_hash[:days] = seconds / 86_400
-        time_hash[:hours] = seconds / 3600 % 24
-        time_hash[:minutes] = seconds / 60 % 60 
+        time_hash[:days] = time[0..1].to_i / 24
+        time_hash[:hours] = time[0..1].to_i % 24
+        time_hash[:minutes] = time[-2..-1].to_i
         time_hash
     end 
 end 
