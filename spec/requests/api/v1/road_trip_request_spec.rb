@@ -113,4 +113,24 @@ describe 'Roadtrip API', :vcr do
         expect(result[:error]).to eq("impossible")
     end 
 
+    it 'can deal with a wrong api' do
+        user = User.create!(email: "whatever12@example.com", password: "password1", password_confirmation: "password1")
+
+        body = 
+            {
+            "origin": "New York, NY",
+            "destination": "Denver,CO",
+            "api_key": "abcdefgi"
+            }
+            
+        post "/api/v1/roadtrip", params: body 
+
+        expect(response).to_not be_successful
+
+        result = JSON.parse(response.body, symbolize_names: true)
+         
+        expect(result).to have_key(:error)
+        expect(result[:error]).to eq("bad request")
+    end 
+
 end 
