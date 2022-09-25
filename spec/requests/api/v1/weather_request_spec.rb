@@ -7,7 +7,7 @@ describe 'Weather API', :vcr do
         expect(response).to be_successful
 
         weather = JSON.parse(response.body, symbolize_names: true)[:data]
-
+        
         expect(weather).to have_key(:id)
         expect(weather[:id]).to eq(nil)
 

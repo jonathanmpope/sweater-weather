@@ -5,6 +5,7 @@ Rails.application.routes.draw do
             resources :sessions, only: [:create]
             get '/forecast', to: 'weather#show'
             resources :users, only: [:create]
+            resources :roadtrip, only: [:create]
         end 
     end 
 end
