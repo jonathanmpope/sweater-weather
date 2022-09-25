@@ -7,5 +7,13 @@ RSpec.describe MapquestFacade do
 
             expect(results).to be_a Coordinates 
         end 
+    end
+    
+    describe "#get_directions" do
+        it 'returns directions', :vcr do 
+            results = MapquestFacade.get_directions("denver,CO", "peublo,CO")
+
+            expect(results).to be_a Directions
+        end 
     end 
 end 

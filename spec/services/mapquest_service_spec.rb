@@ -23,4 +23,24 @@ RSpec.describe MapquestService do
         expect(response[:results].first[:locations].first[:latLng][:lng]).to be_a Float  
     end
   end
+
+  describe '#get_directions' do
+    it 'returns directions for a road trip', :vcr do
+        response = MapquestService.get_directions("denver,CO", "peublo,CO")
+        
+        expect(response).to be_a Hash
+       
+        expect(response[:route]).to be_a Hash
+
+        expect(response[:route]).to be_a Hash 
+        expect(response[:route]).to have_key :routeError
+        expect(response[:route][:routeError]).to be_a Hash 
+
+        expect(response[:route][:routeError]).to have_key :errorCode
+        expect(response[:route][:routeError][:errorCode]).to be_a Integer
+        
+        expect(response[:route]).to have_key :formattedTime
+        expect(response[:route][:formattedTime]).to be_a String
+    end
+  end
 end 

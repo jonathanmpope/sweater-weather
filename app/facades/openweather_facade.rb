@@ -8,4 +8,10 @@ class OpenweatherFacade
         Forecast.new(current, hourly, daily)
     end 
 
+    def self.get_road_trip_weather(coordinates, directions)
+        json = OpenweatherService.get_weather(coordinates)
+        weather = Weather_at_eta.new(json, directions)
+        Roadtrip.new(directions, weather)
+    end 
+
 end 
