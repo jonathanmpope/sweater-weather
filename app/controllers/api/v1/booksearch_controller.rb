@@ -6,10 +6,10 @@ class Api::V1::BooksearchController < ApplicationController
             forecast = OpenweatherFacade.get_booksearch_weather(coordinates)
             book_hash = BooksearchFacade.get_info(params[:location], params[:quantity])
             destination = params[:location]
-            
+             
             render json: BooksSerializer.book_json(destination, forecast, book_hash), status: 200
         else 
-            render json: { error: "something" }, status: 404
+            render json: { error: "bad request: missing data" }, status: 422
         end 
     end 
 

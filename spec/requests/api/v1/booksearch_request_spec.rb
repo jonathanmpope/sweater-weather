@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Booksearch API', :vcr do
-    it 'can return books data' do
+describe 'Booksearch API' do
+    it 'can return books data', :vcr do
         get "/api/v1/book-search?location=denver,co&quantity=5"
 
         expect(response).to be_successful
@@ -45,5 +45,31 @@ describe 'Booksearch API', :vcr do
 
         expect(books[:attributes][:books].first).to have_key(:publisher)
         expect(books[:attributes][:books].first[:publisher]).to be_a Array 
+    end 
+
+    it 'can can deal with a missing search param', :vcr do
+        get "/api/v1/book-search?quantity=5"
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq 422
+
+        result = JSON.parse(response.body, symbolize_names: true) 
+
+        expect(result).to have_key(:error)
+        expect(result[:error]).to eq("bad request: missing data")
+    end 
+
+    xit 'can can deal with a missing quantity param', :vcr do
+        get "/api/v1/book-search?location=denver,co"
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq 422
+
+        result = JSON.parse(response.body, symbolize_names: true) 
+
+        expect(result).to have_key(:error)
+        expect(result[:error]).to eq("bad request: missing data")
     end 
 end 

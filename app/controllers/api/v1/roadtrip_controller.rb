@@ -10,7 +10,7 @@ class Api::V1::RoadtripController < ApplicationController
              
                 render json: RoadtripSerializer.new(weather), status: 200
             else 
-                render json: { error: "impossible" }, status: 401
+                render json: { error: "impossible" }, status: 422
             end 
         else  
             render json: { error: "bad request" }, status: 401
