@@ -16,4 +16,12 @@ RSpec.describe BaseService do
       expect(service).to be_a(Object)
     end
   end
+
+  describe '#booksearch_conn ' do
+    it 'returns a response' do
+      service = BaseService.booksearch_conn 
+
+      expect(service).to be_a(Object)
+    end
+  end
 end
