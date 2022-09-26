@@ -60,7 +60,7 @@ describe 'Booksearch API' do
         expect(result[:error]).to eq("bad request: missing data")
     end 
 
-    xit 'can can deal with a missing quantity param', :vcr do
+    it 'can can deal with a missing quantity param', :vcr do
         get "/api/v1/book-search?location=denver,co"
 
         expect(response).to_not be_successful
