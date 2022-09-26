@@ -45,6 +45,22 @@ describe 'Booksearch API' do
 
         expect(books[:attributes][:books].first).to have_key(:publisher)
         expect(books[:attributes][:books].first[:publisher]).to be_a Array 
+
+        expect(books[:attributes][:books].first).to_not have_key(:type)
+        expect(books[:attributes][:books].first).to_not have_key(:edition_count)
+        expect(books[:attributes][:books].first).to_not have_key(:seed)
+        expect(books[:attributes][:books].first).to_not have_key(:key)
+        expect(books[:attributes][:books].first).to_not have_key(:edition_key)
+        expect(books[:attributes][:books].first).to_not have_key(:publish_date)
+        expect(books[:attributes][:books].first).to_not have_key(:publish_year)
+        expect(books[:attributes][:books].first).to_not have_key(:first_publish_year)
+        expect(books[:attributes][:books].first).to_not have_key(:last_midified_i)
+        expect(books[:attributes][:books].first).to_not have_key(:ebook_count_i)
+        expect(books[:attributes][:books].first).to_not have_key(:ebook_access)
+        expect(books[:attributes][:books].first).to_not have_key(:has_fulltext)
+        expect(books[:attributes][:books].first).to_not have_key(:publish_scan_b)
+        expect(books[:attributes][:books].first).to_not have_key(:language)
+        expect(books[:attributes][:books].first).to_not have_key(:author_name)
     end 
 
     it 'can can deal with a missing search param', :vcr do
