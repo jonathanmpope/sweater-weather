@@ -11,7 +11,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "#{user.api_key}"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to be_successful
 
@@ -57,7 +57,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "#{user.api_key}"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to be_successful
 
@@ -103,7 +103,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "#{user.api_key}"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to be_successful
 
@@ -149,7 +149,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "#{user.api_key}"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to_not be_successful
 
@@ -169,7 +169,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "abcdefgi"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to_not be_successful
 
@@ -189,7 +189,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "#{user.api_key}"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to_not be_successful
 
@@ -209,7 +209,7 @@ describe 'Roadtrip API', :vcr do
             "api_key": "#{user.api_key}"
             }
             
-        post "/api/v1/roadtrip", params: body 
+        post "/api/v1/road_trip", params: body 
 
         expect(response).to_not be_successful
 
