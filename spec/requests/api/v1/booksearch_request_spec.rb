@@ -7,7 +7,7 @@ describe 'Booksearch API', :vcr do
         expect(response).to be_successful
 
         books = JSON.parse(response.body, symbolize_names: true)[:data]
-        binding.pry 
+      
         expect(books).to have_key(:id)
         expect(books[:id]).to eq(nil)
 
@@ -19,7 +19,7 @@ describe 'Booksearch API', :vcr do
 
         expect(books[:attributes]).to have_key(:destination)
         expect(books[:attributes][:destination]).to be_a String 
-        expect(books[:attributes][:start_city]).to eq "denver,co"
+        expect(books[:attributes][:destination]).to eq "denver,co"
 
         expect(books[:attributes]).to have_key(:forecast)
         expect(books[:attributes][:forecast]).to be_a Hash 
