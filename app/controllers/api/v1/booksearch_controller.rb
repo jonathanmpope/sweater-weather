@@ -7,7 +7,7 @@ class Api::V1::BooksearchController < ApplicationController
             book_hash = BooksearchFacade.get_info(params[:location], params[:quantity])
             destination = params[:location]
             
-            render json: BooksSerializer.new(destination, forecast, book_hash), status: 200
+            render json: BooksSerializer.book_json(destination, forecast, book_hash), status: 200
         else 
             render json: { error: "something" }, status: 404
         end 
