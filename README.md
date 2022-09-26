@@ -45,7 +45,7 @@ This is my final solo Mod 3 project at Turing.
 
 ## Database Schema
 
-Database Schema Image
+![](/app/images/database.png)
 
 # Endpoints
 ## Retrieve Precise Weather Info
