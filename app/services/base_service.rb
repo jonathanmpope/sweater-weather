@@ -8,6 +8,10 @@ class BaseService
         Faraday.new(url: 'http://www.mapquestapi.com/')
     end 
 
+    def self.booksearch_conn 
+        Faraday.new(url: 'http://openlibrary.org/')
+    end 
+
     def self.get_json(response)
         JSON.parse(response.body, symbolize_names: true)
     end 
