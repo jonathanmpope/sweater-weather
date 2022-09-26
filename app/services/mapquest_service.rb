@@ -1,8 +1,10 @@
 class MapquestService 
 
     def self.get_coordinates(location)
-        response = BaseService.map_quest_conn.get("/geocoding/v1/address?key=#{ENV['map_key']}&location=#{location}")
-        BaseService.get_json(response)
+        Rails.cache.fetch('coordinates', expires_in: 1.week) do
+            response = BaseService.map_quest_conn.get("/geocoding/v1/address?key=#{ENV['map_key']}&location=#{location}")
+            BaseService.get_json(response)
+        end 
     end
 
      def self.get_directions(start, stop)

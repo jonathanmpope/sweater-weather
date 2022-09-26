@@ -2,7 +2,7 @@ class Api::V1::RoadTripController < ApplicationController
 
     def create 
         user = User.find_by(api_key: params[:api_key]) 
-        if user && params[:origin] != "" && params[:destination] != "" 
+        if user.present? && params[:origin] != "" && params[:destination] != "" 
             directions = MapquestFacade.get_directions(params[:origin], params[:destination])
             if directions != "Impossible"
                 coordinates = MapquestFacade.get_coordinates(params[:destination])
