@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe 'Booksearch API' do
     it 'can return books data', :vcr do
-        get "/api/v1/book-search?location=denver,co&quantity=5"
+        user = User.create!(email: "whatever12@example.com", password: "password1", password_confirmation: "password1")
+
+        get "/api/v1/book-search?location=denver,co&quantity=5&api_key=#{user.api_key}"
 
         expect(response).to be_successful
 
@@ -64,7 +66,8 @@ describe 'Booksearch API' do
     end 
 
     it 'can can deal with a missing search param', :vcr do
-        get "/api/v1/book-search?quantity=5"
+        user = User.create!(email: "whatever12@example.com", password: "password1", password_confirmation: "password1")
+        get "/api/v1/book-search?quantity=5&api_key=#{user.api_key}"
 
         expect(response).to_not be_successful
 
@@ -73,11 +76,12 @@ describe 'Booksearch API' do
         result = JSON.parse(response.body, symbolize_names: true) 
 
         expect(result).to have_key(:error)
-        expect(result[:error]).to eq("bad request: location and quantity must be provided")
+        expect(result[:error]).to eq("bad request: api key, location, and quantity must be provided")
     end 
 
     it 'can can deal with a missing quantity param', :vcr do
-        get "/api/v1/book-search?location=denver,co"
+        user = User.create!(email: "whatever12@example.com", password: "password1", password_confirmation: "password1")
+        get "/api/v1/book-search?location=denver,co&api_key=#{user.api_key}"
 
         expect(response).to_not be_successful
 
@@ -86,6 +90,20 @@ describe 'Booksearch API' do
         result = JSON.parse(response.body, symbolize_names: true) 
 
         expect(result).to have_key(:error)
-        expect(result[:error]).to eq("bad request: location and quantity must be provided")
+        expect(result[:error]).to eq("bad request: api key, location, and quantity must be provided")
+    end 
+
+    it 'can can deal with a missing api key', :vcr do
+        user = User.create!(email: "whatever12@example.com", password: "password1", password_confirmation: "password1")
+        get "/api/v1/book-search?location=denver,co&quantity=5"
+
+        expect(response).to_not be_successful
+
+        expect(response.status).to eq 422
+
+        result = JSON.parse(response.body, symbolize_names: true) 
+
+        expect(result).to have_key(:error)
+        expect(result[:error]).to eq("bad request: api key, location, and quantity must be provided")
     end 
 end 

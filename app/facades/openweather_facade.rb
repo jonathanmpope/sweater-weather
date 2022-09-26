@@ -15,13 +15,13 @@ class OpenweatherFacade
             Roadtrip.new(directions, weather)
         else 
             json = OpenweatherService.get_weather(coordinates)
-            current = Booksearchweather.new(json)
+            Booksearchweather.new(json)
         end 
     end 
 
     def self.get_booksearch_weather(coordinates)
         json = OpenweatherService.get_weather(coordinates)
-        current = Booksearchweather.new(json)
+        Booksearchweather.new(json)
     end 
 
 end 
