@@ -7,7 +7,7 @@ describe 'Booksearch API', :vcr do
         expect(response).to be_successful
 
         books = JSON.parse(response.body, symbolize_names: true)[:data]
-        
+        binding.pry 
         expect(books).to have_key(:id)
         expect(books[:id]).to eq(nil)
 

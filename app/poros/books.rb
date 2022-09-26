@@ -1,10 +1,12 @@
 class Books 
-    attr_reader :date, 
+    attr_reader :isbn, 
+                :title, 
+                :publisher
                 
-
-    def initialize(data, total_books) 
-       @title = data[:title]
-       @
+    def initialize(data) 
+        @isbn = data[:isbn]
+        @title = data[:title]
+        @publisher = data[:publisher]
     end 
 
 end 
