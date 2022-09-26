@@ -9,12 +9,17 @@ class OpenweatherFacade
     end 
 
     def self.get_road_trip_weather(coordinates, directions)
-        json = OpenweatherService.get_weather(coordinates)
-        weather = Weather_at_eta.new(json, directions)
-        Roadtrip.new(directions, weather)
+        if directions != "booksearch"
+            json = OpenweatherService.get_weather(coordinates)
+            weather = Weather_at_eta.new(json, directions)
+            Roadtrip.new(directions, weather)
+        else 
+            json = OpenweatherService.get_weather(coordinates)
+            current = Booksearchweather.new(json)
+        end 
     end 
 
-      def self.get_booksearch_weather(coordinates)
+    def self.get_booksearch_weather(coordinates)
         json = OpenweatherService.get_weather(coordinates)
         current = Booksearchweather.new(json)
     end 

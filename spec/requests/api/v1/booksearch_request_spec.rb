@@ -73,7 +73,7 @@ describe 'Booksearch API' do
         result = JSON.parse(response.body, symbolize_names: true) 
 
         expect(result).to have_key(:error)
-        expect(result[:error]).to eq("bad request: missing data")
+        expect(result[:error]).to eq("bad request: location and quantity must be provided")
     end 
 
     it 'can can deal with a missing quantity param', :vcr do
@@ -86,6 +86,6 @@ describe 'Booksearch API' do
         result = JSON.parse(response.body, symbolize_names: true) 
 
         expect(result).to have_key(:error)
-        expect(result[:error]).to eq("bad request: missing data")
+        expect(result[:error]).to eq("bad request: location and quantity must be provided")
     end 
 end 
