@@ -14,4 +14,9 @@ class OpenweatherFacade
         Roadtrip.new(directions, weather)
     end 
 
+      def self.get_booksearch_weather(coordinates)
+        json = OpenweatherService.get_weather(coordinates)
+        current = Booksearchweather.new(json)
+    end 
+
 end 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
             get '/forecast', to: 'weather#show'
             resources :users, only: [:create]
             resources :roadtrip, only: [:create]
+            get 'book-search', to: 'booksearch#create' 
         end 
     end 
 end
